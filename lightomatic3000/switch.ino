@@ -1,13 +1,9 @@
-int switch_pin = 12; // Switch center is connected to D12, On end is connected to ground
-int status_led = 13; // 13 is built in LED
-//int switch_on = false; // defined in main
-
-void switch_setup() {
+void switch_setup(int switch_pin, int status_led) {
   pinMode(status_led, OUTPUT);
   pinMode(switch_pin, INPUT_PULLUP); // use internal pullup resistor
 }
 
-void switch_loop() {
+void switch_loop(int switch_pin, int status_led) {
   // Check if switch is on
   switch_on = digitalRead(switch_pin) == LOW;
   // illuminate Arduino LED if switch is on
