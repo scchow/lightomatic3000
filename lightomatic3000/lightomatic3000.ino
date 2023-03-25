@@ -1,5 +1,8 @@
 #include <Servo.h>
 
+bool debug = true;
+int baud_rate = 9600;
+
 // Servo variables
 Servo servo;  // create servo object to control a servo
 int pos = 0;    // variable to store the servo position
@@ -27,10 +30,13 @@ void setup() {
   servo_setup(servo_pin);
   photoresistor_setup(photoresistor_pin);
   switch_setup(switch_pin, status_led);
+  if (debug){
+    Serial.begin(baud_rate);
+  }
 }
 
 void loop() {
-  photoresistor_loop(photoresistor_pin); // check room status
+  photoresistor_loop(photoresistor_pin, debug); // check room status
   switch_loop(switch_pin, status_led); // check if switch is on
   
   lights_dimming = lightLevel <= threshold_dimming;
@@ -38,15 +44,21 @@ void loop() {
   
   // if the switch is on, and the room is dark, press the button
   if (switch_on){
-    Serial.println("Switch on");
+    if (debug){
+      Serial.println("Switch on");
+    }
     if (lights_dimming | lights_off){
       press_button(press_angle);
-      Serial.println("Dimming/Off: Pressed button once");
+      if (debug){
+        Serial.println("Dimming/Off: Pressed button once");
+      }
       // If the room is only dimming, double press to turn in back on
       if (!lights_off){
-          delay(1000);
-          press_button(press_angle);
+        delay(1000);
+        press_button(press_angle);
+        if (debug){
           Serial.println("Dimming: Pressed button second");
+        }
       }
     }
   }

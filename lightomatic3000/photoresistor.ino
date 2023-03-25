@@ -1,9 +1,10 @@
 void photoresistor_setup(int pin){
-    pinMode(pin, INPUT);
-    Serial.begin(9600);
+  pinMode(pin, INPUT);
 }
 
-void photoresistor_loop(int pin){
-    lightLevel = analogRead(pin);
+void photoresistor_loop(int pin, bool debug){
+  lightLevel = analogRead(pin);
+  if (debug){
     Serial.println(lightLevel);
+  }
 }
