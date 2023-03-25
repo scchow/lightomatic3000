@@ -1,36 +1,35 @@
 #include <Servo.h>
 
+// Servo variables
+Servo servo;  // create servo object to control a servo
 int pos = 0;    // variable to store the servo position
-int press_angle = 10;
+int press_angle = 10; // how much the servo should turn to press the button
 
-bool switch_on = false; // 
+// Room state variables
+bool switch_on = false; 
 bool lights_dimming = false;
 bool lights_off = false;
-// light levels calibrated based on 10k resistor running off of 3.3v
 
+// Photoresistor light detection variables
+// light levels calibrated based on 10k resistor running off of 3.3v
 int lightLevel;
-int threshold_dimming = 500; // lower than this the light is off
-int threshold_off = 400;
-//bool room_lit = true; // defined in main
+int threshold_dimming = 500; //threshold for the room lights to be considered dimming
+int threshold_off = 400; // threshold for the room lights to be considered off
 
 // Pin Inputs
-const int switch_pin = 8; // Switch center is connected to D12, On end is connected to ground
+const int switch_pin = 8; 
 const int photoresistor_pin = A0;
-
 // Pin Outputs
-int status_led = LED_BUILTIN; // 13 is built in LED
-Servo servo;  // create servo object to control a servo
+const int status_led = LED_BUILTIN; // 13 is built in LED
 const int servo_pin = 12;
 
 void setup() {
-  // put your setup code here, to run once:
   servo_setup(servo_pin);
   photoresistor_setup(photoresistor_pin);
   switch_setup(switch_pin, status_led);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   photoresistor_loop(photoresistor_pin); // check room status
   switch_loop(switch_pin, status_led); // check if switch is on
   

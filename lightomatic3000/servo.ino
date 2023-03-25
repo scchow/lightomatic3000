@@ -28,4 +28,3 @@ void press_button(int angle){
   // move servo back to start
   servo.write(0);
 }
-
