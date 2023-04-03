@@ -33,6 +33,7 @@ void setup() {
   if (debug){
     Serial.begin(baud_rate);
   }
+  delay(1000*3); // wait 3 seconds before starting
 }
 
 void loop() {
@@ -60,7 +61,7 @@ void loop() {
           Serial.println("Dimming: Pressed button second");
         }
       }
+      delay(1000*3); // wait 5 seconds
     }
   }
-  delay(1000*5); // wait 5 seconds
 }
