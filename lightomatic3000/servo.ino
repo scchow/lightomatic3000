@@ -8,10 +8,14 @@ void servo_setup(int servo_pin) {
 
 // move the servo by angle degrees
 // uses global pos
+// TODO: This does not work because servo doesn't seem to support negative angles
+bool reverse = false;
 void run_servo(int angle) {
+  reverse = angle < 0;
+  angle = abs(angle);
   for (int i = 0; i <= angle; i++) { // goes from 0 degrees to 180 degrees
     // in steps of 1 degree
-    if (angle < 0){
+    if (reverse){
       pos -= 1;
     } else {
       pos += 1;

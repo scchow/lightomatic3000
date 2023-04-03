@@ -27,6 +27,7 @@ void setup() {
   servo_setup(servo_pin);
   photoresistor_setup(photoresistor_pin);
   switch_setup(switch_pin, status_led);
+  delay(1000*3); // wait 3 seconds before starting
 }
 
 void loop() {
@@ -44,11 +45,11 @@ void loop() {
       Serial.println("Dimming/Off: Pressed button once");
       // If the room is only dimming, double press to turn in back on
       if (!lights_off){
-          delay(1000);
+          delay(1500);
           press_button(press_angle);
           Serial.println("Dimming: Pressed button second");
       }
+      delay(1000*3); // wait 5 seconds
     }
   }
-  delay(1000*5); // wait 5 seconds
 }
