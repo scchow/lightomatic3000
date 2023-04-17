@@ -6,7 +6,7 @@ int baud_rate = 9600;
 // Servo variables
 Servo servo;  // create servo object to control a servo
 int pos = 0;    // variable to store the servo position
-int press_angle = 10; // how much the servo should turn to press the button
+int press_angle = 20; // how much the servo should turn to press the button
 
 // Room state variables
 bool switch_on = false; 
@@ -16,7 +16,7 @@ bool lights_off = false;
 // Photoresistor light detection variables
 // light levels calibrated based on 10k resistor running off of 3.3v
 int lightLevel;
-int threshold_dimming = 500; //threshold for the room lights to be considered dimming
+int threshold_dimming = 525; //threshold for the room lights to be considered dimming
 int threshold_off = 400; // threshold for the room lights to be considered off
 
 // Pin Inputs
@@ -48,6 +48,13 @@ void loop() {
     if (debug){
       Serial.println("Switch on");
     }
+    // if lights are dimming give it 1 second to see if it is actually off
+    if (lights_dimming){
+      delay(2);
+      photoresistor_loop(photoresistor_pin, debug); // check room status
+      lights_dimming = lightLevel <= threshold_dimming;
+      lights_off = lightLevel <= threshold_off;
+    }
     if (lights_dimming | lights_off){
       press_button(press_angle);
       if (debug){
@@ -64,4 +71,5 @@ void loop() {
       delay(1000*3); // wait 5 seconds
     }
   }
+  delay(1000); // Run at 1Hz
 }

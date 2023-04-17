@@ -29,6 +29,7 @@ void run_servo(int angle) {
 void press_button(int angle){
   // Move servo to specified angle
   run_servo(angle);
+  delay(100); // wait a tenth of a second
   // move servo back to start
   servo.write(0);
 }
