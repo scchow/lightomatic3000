@@ -1,6 +1,7 @@
 #include <Servo.h>
 
 bool debug = true;
+bool plot = true;
 int baud_rate = 9600;
 
 // Servo variables
@@ -14,17 +15,18 @@ bool lights_dimming = false;
 bool lights_off = false;
 
 // Photoresistor light detection variables
-// light levels calibrated based on 10k resistor running off of 3.3v
-int lightLevel;
-int threshold_dimming = 525; //threshold for the room lights to be considered dimming
-int threshold_off = 400; // threshold for the room lights to be considered off
+// light levels calibrated based on 10k resistor running off of 5V
+// Estimated based on 3.3V values (should be about 1.5x the 3.3V values)
+int lightLevel = 0;
+int threshold_dimming = 800; //threshold for the room lights to be considered dimming (525*1.515)
+int threshold_off = 600; // threshold for the room lights to be considered off (400*1.515)
 
 // Pin Inputs
-const int switch_pin = 8; 
-const int photoresistor_pin = A0;
+const int switch_pin = 2; 
+const int photoresistor_pin = A7;
 // Pin Outputs
+const int servo_pin = 3;
 const int status_led = LED_BUILTIN; // 13 is built in LED
-const int servo_pin = 12;
 
 void setup() {
   servo_setup(servo_pin);
@@ -57,15 +59,18 @@ void loop() {
     }
     if (lights_dimming | lights_off){
       press_button(press_angle);
-      if (debug){
-        Serial.println("Dimming/Off: Pressed button once");
-      }
+
       // If the room is only dimming, double press to turn in back on
       if (!lights_off){
         delay(1000);
         press_button(press_angle);
         if (debug){
-          Serial.println("Dimming: Pressed button second");
+          Serial.println("Lights/Dimming: Double Press");
+        }
+      }
+      else{
+        if (debug){
+          Serial.println("Lights/Off: Single Press");
         }
       }
       delay(1000*3); // wait 5 seconds
