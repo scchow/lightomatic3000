@@ -5,8 +5,4 @@ void photoresistor_setup(int pin){
 
 void photoresistor_loop(int pin, bool debug){
   lightLevel = analogRead(pin);
-  if (debug || plot){
-    Serial.print("light_level:");
-    Serial.println(lightLevel);
-  }
 }

@@ -31,6 +31,11 @@ const int status_led = LED_BUILTIN; // 13 is built in LED
 
 void update_light_status(){
   photoresistor_loop(photoresistor_pin, debug); // check room status
+  if (debug || plot){
+    Serial.print("light_level:");
+    Serial.print(lightLevel);
+    Serial.print(",");
+  }
   lights_off = lightLevel <= threshold_off;
   lights_dimming = !lights_off & (lightLevel <= threshold_dimming);
   if (plot){
@@ -38,7 +43,8 @@ void update_light_status(){
     Serial.print(1000 * (int) lights_off);
     Serial.print(",");
     Serial.print("lights_dimming:");
-    Serial.println(1000 * (int) lights_dimming);
+    Serial.print(1000 * (int) lights_dimming);
+    Serial.print(",");
   }
 }
 
@@ -49,11 +55,12 @@ void update_switch_status(){
   if (plot){
     // Multiply by 1000 to make switch show up on plot with light level
     Serial.print("switch:");
-    Serial.println(1000 * (int)switch_on);
+    Serial.print(1000 * (int)switch_on);
+    Serial.print(",");
   }
   // Otherwise just print status message as normal
   else if (debug) {
-    Serial.print("switch: ");
+    Serial.print("Status: switch=");
     Serial.println(switch_on ? "on" : "off");
   }
 }
@@ -80,26 +87,21 @@ void loop() {
       delay(2000);
       update_light_status();
     }
-    if (lights_dimming | lights_off){
+    if (lights_dimming){
       press_button(press_angle);
-
-      // If the room is only dimming, double press to turn in back on
-      if (lights_dimming){
-        delay(1.5*1000);
-        press_button(press_angle);
-        // Only print light status message if we are not plotting
-        if (debug & !plot){
-          Serial.println("Lights/Dimming: Double Press");
-        }
+      delay(1000);
+      press_button(press_angle);
+      if (debug & !plot){
+        Serial.println("Status: Lights/Dimming: Double Press");
       }
-      else{
-        // Only print light status message if we are not plotting
-        if (debug & !plot){
-          Serial.println("Lights/Off: Single Press");
-        }
+    }
+    if (lights_off){
+      press_button(press_angle);
+      if (debug & !plot){
+        Serial.println("Status: Lights/Off: Single Press");
       }
-      // delay(1000*3); // wait 5 seconds
     }
   }
+  Serial.println();
   delay(1000); // Run at 1Hz
 }
