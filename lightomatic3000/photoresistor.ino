@@ -1,10 +1,12 @@
 void photoresistor_setup(int pin){
-   pinMode(pin, INPUT);// Set pResistor - A0 pin as an input (optional)
+  pinMode(pin, INPUT);// Set photorestor pin pin as an input
   Serial.begin(9600);
-//   Serial.println("Test print");
 }
 
-void photoresistor_loop(int pin){
+void photoresistor_loop(int pin, bool debug){
   lightLevel = analogRead(pin);
-  Serial.println(lightLevel);
+  if (debug || plot){
+    Serial.print("light_level:");
+    Serial.println(lightLevel);
+  }
 }
