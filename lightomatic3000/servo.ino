@@ -28,8 +28,9 @@ void run_servo(int angle) {
 // Presses the light switch
 void press_button(int angle){
   // Move servo to specified angle
-  run_servo(angle);
-  delay(100); // wait a tenth of a second
+  // run_servo(angle);
+  servo.write(angle);
+  delay(250); // wait 0.25 second
   // move servo back to start
   servo.write(0);
 }
