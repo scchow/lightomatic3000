@@ -1,0 +1,9 @@
+* Netlist created with www.circuit-diagram.org
+* 
+R1 0 1 4700
+'changeoverswitch a:1 c:2 t=Changeover closed=False
+V2 ? 5 5
+V3 2 0
+'motor a:5 b:2
+R4 5 4 4700
+R5 4 2 10000
