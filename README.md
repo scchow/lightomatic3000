@@ -3,12 +3,12 @@
 The Lightomatic-3000 is a state-of-the-art "robot" (in the loosest sense of the word) that keeps lights from dimming/turning off due to poorly calibrated presence/ambient lighting systems.
 
 <p align="center">
-  <img alt="Final Setup." src="docs/setup_v2.jpg" height="500" >
+  <img alt="Final Setup." src="docs/setup_v2.jpg">
 </p>
 
 ## The Problem: Got a light?
 
-The lighting system in a particular building has an energy saving feature that dims and turns off the light if:
+The lighting system in a certain building has an energy saving feature that dims and turns off the light if:
 - the ambient light is above a certain threshold
 - no motion has been detected for a certain amount of time
 
@@ -52,15 +52,16 @@ It also features an optional switch that can be used to enable/disable the syste
 5. Plug arduino in
 6. Let there be light!
 
-## Circuit Diagram
+## Circuit Schematic
 
-![Circuit Diagram](docs/circuit/circuit.png)
+<p align="center">
+  <img alt="Circuit Schematic" src="docs/circuit/circuit.png">
+</p>
 
-## Some Photos
-
-### Assembled Protoboard
-![Image of assembled protoboard](docs/protoboard_v2.jpg)
-
+## Assembled Protoboard
+<p align="center">
+  <img alt="Image of assembled protoboard." src="docs/protoboard_v2.jpg">
+</p>
 
 
 
