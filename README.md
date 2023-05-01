@@ -1,6 +1,10 @@
 # Lightomatic-3000
 
-The Lightomatic-3000 is a state-of-the-art ``robot" (in the loosest sense of the word) that keeps lights from dimming/turning off due to poorly calibrated presence/ambient lighting systems.
+The Lightomatic-3000 is a state-of-the-art "robot" (in the loosest sense of the word) that keeps lights from dimming/turning off due to poorly calibrated presence/ambient lighting systems.
+
+<p align="center">
+  <img alt="Final Setup." src="docs/setup_v2.jpg" height="500" >
+</p>
 
 ## The Problem: Got a light?
 
@@ -57,8 +61,7 @@ It also features an optional switch that can be used to enable/disable the syste
 ### Assembled Protoboard
 ![Image of assembled protoboard](docs/protoboard_v2.jpg)
 
-### Final (for now) Setup with Mount
-![Final Setup](docs/setup_v2.jpg)
+
 
 
 
