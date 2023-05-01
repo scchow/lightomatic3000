@@ -36,7 +36,7 @@ It also features an optional switch that can be used to enable/disable the syste
 ## Parts Needed
 - Arduino + USB power
 - 5V servo (3.3V would work)
-- photoresistor
+- Photoresistor
 - Resistor (10k ohm)
 - SPDT switch (optional)
 - Mounting method (Tape or 3d printed mount)
