@@ -1,14 +1,23 @@
+/**
+ * @file switch_test.ino
+ * @author Scott Chow
+ * @brief Testing the switch status indicator
+ *
+ */
+
 int switch_pin = 12;
 int led = 13;
 int switch_on = false;
 
-void setup() {
+void setup()
+{
   // put your setup code here, to run once:
   pinMode(led, OUTPUT);
   pinMode(switch_pin, INPUT_PULLUP);
 }
 
-void loop() {
+void loop()
+{
   // put your main code here, to run repeatedly:
   switch_on = digitalRead(switch_pin) == LOW;
   digitalWrite(led, switch_on);
